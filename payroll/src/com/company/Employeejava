@@ -2,9 +2,13 @@ package com.company;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Employee {
     private String name;
@@ -12,17 +16,6 @@ public class Employee {
     private String rol;
     private String startDate;
     private String startSal;
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", dob='" + dob + '\'' +
-                ", rol='" + rol + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", startSal='" + startSal + '\'' +
-                '}';
-    }
 
     public Employee(String name, String dob, String rol, String startDate, String startSal) {
         this.name = name;
@@ -77,10 +70,11 @@ public class Employee {
 
     /**
      * get age of employee
+     * 
      * @param dob - birthDay of employee
      * @return age of employee
      */
-    public int getAge(String dob){
+    public int getAge(String dob) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             Date date = sdf.parse(dob);
@@ -88,24 +82,25 @@ public class Employee {
             cal.setTime(date);
             return Calendar.getInstance().get(Calendar.YEAR) - cal.get(Calendar.YEAR);
         } catch (ParseException e) {
-           return 0;
+            return 0;
         }
-
     }
 
     /**
      * calculate working day of employee
-     * @param startDate
-     * @return
+     * 
+     * @param startDate - start date
+     * @return map has year and moth worked
      */
-    public long getWorkingDays (String startDate){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        try {
-            Date date = sdf.parse(startDate);
-            long diff =(new Date()).getTime() - date.getTime() ;
-            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        } catch (ParseException e) {
-            return 0;
-        }
+    public Map<String, Integer> getWorkingDays(String startDate) {
+        Map<String, Integer> mapYearAndMonth = new HashMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        // convert String to LocalDate
+        LocalDate startDateLocal = LocalDate.parse(startDate, formatter);
+        long monthsBetween = ChronoUnit.MONTHS.between(startDateLocal, LocalDate.now());
+        long yearsBetween = ChronoUnit.YEARS.between(startDateLocal, LocalDate.now());
+        mapYearAndMonth.put("year", (int) yearsBetween);
+        mapYearAndMonth.put("month", (int) monthsBetween - (int) yearsBetween * 12);
+        return mapYearAndMonth;
     }
 }
