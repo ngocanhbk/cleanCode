@@ -13,19 +13,21 @@ import java.util.Map;
  * @author buithingocanh
  */
 public class Main {
-
+    private final static double COEFFICIENTS_SALARY = 1.06;
     public static void main(String[] args) {
         String csvFileLink = "../payroll/input/employee.csv";
 
         List<Employee> list = readFileCSV(csvFileLink);
         for (Employee emp : list) {
             Map<String, Integer> mapYearAndMonth = emp.getWorkingDays(emp.getStartDate());
-            System.out.println("Employee{" +
+            long nowSal = (long) (Long.valueOf(emp.getStartSal())* Math.pow(COEFFICIENTS_SALARY, mapYearAndMonth.get("year"))); 
+            System.out.println("Employee {" +
                     "name:'" + emp.getName() + '\'' +
                     ", age:'" + emp.getAge(emp.getDob()) + '\'' +
                     ", rol:'" + emp.getRol() + '\'' +
                     ", workingDay:'" + mapYearAndMonth.get("year") + " years " + mapYearAndMonth.get("month") + " months" + '\'' +
                     ", startSal='" + emp.getStartSal() + '\'' +
+                    ", nowSal='" + nowSal + '\'' +
                     '}');
         }
     }
