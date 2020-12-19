@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_13">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -10,5 +10,32 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="JUnit5.4">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/junit-jupiter-5.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/junit-jupiter-api-5.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/apiguardian-api-1.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/opentest4j-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/junit-platform-commons-1.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/junit-jupiter-params-5.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/junit-jupiter-engine-5.4.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/junit-platform-engine-1.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="testng">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/testng-6.14.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/jcommander-1.72.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../payroll/lib/bsh-2.0b6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

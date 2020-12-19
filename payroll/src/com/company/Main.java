@@ -24,17 +24,16 @@ public class Main {
 
         List<Employee> list = readFileCSV(csvFileLink);
         for (Employee emp : list) {
-            Map<String, Integer> mapYearAndMonth = emp.getWorkingDays(emp.getStartDate());
+            Map<String, Long> mapYearAndMonth = emp.getWorkingDays(emp.getStartDate());
             long nowSal = calculateSalary(Long.valueOf(emp.getStartSal()), mapYearAndMonth.get("year"));
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            Date d = sdf.parse(emp.getDob());
-            sdf.applyPattern("yyyy-MM-dd");
-            String birthday = sdf.format(d);
+            String birthday = convertFormatDate(emp.getDob());
+            String startTime = convertFormatDate(emp.getStartDate());
             System.out.println("Employee {" +
                     "name:'" + emp.getName() + '\'' +
                     ", birthday:'" + birthday + '\'' +
                     ", age:'" + emp.getAge(emp.getDob()) + '\'' +
                     ", rol:'" + emp.getRol() + '\'' +
+                    ", startTime:'" + startTime + '\'' +
                     ", workingDay:'" + mapYearAndMonth.get("year") + " years " + mapYearAndMonth.get("month") + " months" + '\'' +
                     ", startSal='" + emp.getStartSal() + '\'' +
                     ", nowSal='" + nowSal + '\'' +
@@ -78,8 +77,21 @@ public class Main {
      * @param yearWorkings - year worked
      * @return now salary
      */
-    private static long calculateSalary(long startSalary, int yearWorkings) {
-        return (long) (Long.valueOf(startSalary) * Math.pow((1 + COEFFICIENTS_SALARY), yearWorkings));
+    private static long calculateSalary(long startSalary, long yearWorkings) {
+        return (long) (startSalary * Math.pow((1 + COEFFICIENTS_SALARY), yearWorkings));
+    }
+
+    /**
+     * conver string from format yyyyMMdd to format yyyy-MM-dd
+     * @param oldDateString - old date
+     * @return new date
+     * @throws ParseException
+     */
+    private static String convertFormatDate(String oldDateString) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Date date = sdf.parse(oldDateString);
+        sdf.applyPattern("yyyy-MM-dd");
+        return sdf.format(date);
     }
 
 

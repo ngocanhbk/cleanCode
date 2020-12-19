@@ -70,7 +70,7 @@ public class Employee {
 
     /**
      * get age of employee
-     * 
+     *
      * @param dob - birthDay of employee
      * @return age of employee
      */
@@ -88,19 +88,19 @@ public class Employee {
 
     /**
      * calculate working day of employee
-     * 
+     *
      * @param startDate - start date
      * @return map has year and moth worked
      */
-    public Map<String, Integer> getWorkingDays(String startDate) {
-        Map<String, Integer> mapYearAndMonth = new HashMap<>();
+    public Map<String, Long> getWorkingDays(String startDate) {
+        Map<String, Long> mapYearAndMonth = new HashMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         // convert String to LocalDate
         LocalDate startDateLocal = LocalDate.parse(startDate, formatter);
         long monthsBetween = ChronoUnit.MONTHS.between(startDateLocal, LocalDate.now());
         long yearsBetween = ChronoUnit.YEARS.between(startDateLocal, LocalDate.now());
-        mapYearAndMonth.put("year", (int) yearsBetween);
-        mapYearAndMonth.put("month", (int) monthsBetween - (int) yearsBetween * 12);
+        mapYearAndMonth.put("year", yearsBetween);
+        mapYearAndMonth.put("month", monthsBetween - yearsBetween * 12);
         return mapYearAndMonth;
     }
 }
