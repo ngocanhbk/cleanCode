@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/../CleanCode/05OOP/abstractclass/abstractclass.iml" filepath="$PROJECT_DIR$/../CleanCode/05OOP/abstractclass/abstractclass.iml" />
       <module fileurl="file://$PROJECT_DIR$/../CleanCode/05OOP/jungle/jungle.iml" filepath="$PROJECT_DIR$/../CleanCode/05OOP/jungle/jungle.iml" />
       <module fileurl="file://$PROJECT_DIR$/payroll.iml" filepath="$PROJECT_DIR$/payroll.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../payroll_2/payroll_2.iml" filepath="$PROJECT_DIR$/../payroll_2/payroll_2.iml" />
     </modules>
   </component>
 </project>

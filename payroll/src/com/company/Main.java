@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,20 +17,24 @@ import java.util.Map;
  * @author buithingocanh
  */
 public class Main {
-    final static double COEFFICIENTS_SALARY = 1.06;
+    final static double COEFFICIENTS_SALARY = 0.06;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         String csvFileLink = "../payroll/input/employee.csv";
 
         List<Employee> list = readFileCSV(csvFileLink);
         for (Employee emp : list) {
             Map<String, Integer> mapYearAndMonth = emp.getWorkingDays(emp.getStartDate());
-            long nowSal = (long) (Long.valueOf(emp.getStartSal()) * Math.pow(COEFFICIENTS_SALARY, mapYearAndMonth.get("year")));
+            long nowSal = calculateSalary(Long.valueOf(emp.getStartSal()), mapYearAndMonth.get("year"));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            Date d = sdf.parse(emp.getDob());
+            sdf.applyPattern("yyyy-MM-dd");
+            String birthday = sdf.format(d);
             System.out.println("Employee {" +
                     "name:'" + emp.getName() + '\'' +
-//                    ", birthday:'" + emp.getDob() + '\'' +
+                    ", birthday:'" + birthday + '\'' +
                     ", age:'" + emp.getAge(emp.getDob()) + '\'' +
-//                    ", rol:'" + emp.getRol() + '\'' +
+                    ", rol:'" + emp.getRol() + '\'' +
                     ", workingDay:'" + mapYearAndMonth.get("year") + " years " + mapYearAndMonth.get("month") + " months" + '\'' +
                     ", startSal='" + emp.getStartSal() + '\'' +
                     ", nowSal='" + nowSal + '\'' +
@@ -64,5 +71,16 @@ public class Main {
         }
         return employees;
     }
+
+    /**
+     * function calculate salary
+     * @param startSalary - begin salary
+     * @param yearWorkings - year worked
+     * @return now salary
+     */
+    private static long calculateSalary(long startSalary, int yearWorkings) {
+        return (long) (Long.valueOf(startSalary) * Math.pow((1 + COEFFICIENTS_SALARY), yearWorkings));
+    }
+
 
 }

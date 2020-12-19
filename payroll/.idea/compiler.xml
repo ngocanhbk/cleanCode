@@ -7,10 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jungle" />
+        <module name="payroll_2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="jungle" target="15" />
+      <module name="payroll_2" target="11" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="payroll_2" options="-parameters" />
+    </option>
   </component>
 </project>
