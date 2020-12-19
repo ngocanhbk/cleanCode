@@ -1,0 +1,8 @@
+
+Z
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(‚ĞE
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Ëœñøÿÿÿÿ
+š
+java:S1130,"xRemove the declaration of thrown exception 'java.io.FileNotFoundException' which is a subclass of 'java.io.IOException'.(Õ¯µŠüÿÿÿÿ8‚ïÇç.
+E
+java:S20931"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
